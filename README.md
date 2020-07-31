@@ -17,6 +17,8 @@ Maven:
 
 ## Usage
 
+### Query
+
 ```java
 public class Example{
     public List<Product> fetchProducts(){
@@ -44,5 +46,16 @@ public class Product implements Serializable{
     private double price;
     private String category;
     private String priceRange;
+}
+```
+
+
+### Mutation
+
+```java
+public class Example {
+    public void addProduct(Product product){
+        
+    }
 }
 ```

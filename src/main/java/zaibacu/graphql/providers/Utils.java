@@ -79,4 +79,8 @@ public class Utils {
 
         return objectMapper.treeToValue(current, klass);
     }
+
+    public static <T extends Serializable> String toString(T obj) throws JsonProcessingException{
+        return objectMapper.writeValueAsString(obj);
+    }
 }

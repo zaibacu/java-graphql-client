@@ -1,5 +1,6 @@
 package zaibacu.graphql.providers;
 
+import zaibacu.graphql.dto.MutationDTO;
 import zaibacu.graphql.services.HttpService;
 
 import java.io.Serializable;
@@ -47,6 +48,12 @@ public class MutationProvider implements ActionProvider{
 
     @Override
     public <T extends Serializable> Optional<T> execute(String resultPath, Class<T> resultClass) {
-        return service.post(this.toMutation(resultClass), resultPath, resultClass);
+        MutationDTO dto = new MutationDTO(this.toMutation(resultClass));
+        try {
+            return service.post(Utils.toString(dto), resultPath, resultClass);
+        }
+        catch(Exception ex){
+            return Optional.empty();
+        }
     }
 }

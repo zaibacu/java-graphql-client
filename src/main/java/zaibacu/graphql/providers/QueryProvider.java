@@ -1,5 +1,6 @@
 package zaibacu.graphql.providers;
 
+import zaibacu.graphql.dto.QueryDTO;
 import zaibacu.graphql.services.HttpService;
 
 import java.io.Serializable;
@@ -43,6 +44,12 @@ public class QueryProvider implements ActionProvider{
 
     @Override
     public <T extends Serializable> Optional<T> execute(String resultPath, Class<T> resultClass) {
-        return service.post(this.toQuery(resultClass), resultPath, resultClass);
+        QueryDTO dto = new QueryDTO(this.toQuery(resultClass));
+        try {
+            return service.post(Utils.toString(dto), resultPath, resultClass);
+        }
+        catch(Exception ex){
+            return Optional.empty();
+        }
     }
 }
