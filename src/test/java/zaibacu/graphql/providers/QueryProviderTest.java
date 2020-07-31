@@ -31,9 +31,10 @@ public class QueryProviderTest {
     public void testBasicQueryWParams(){
         QueryProvider provider = new QueryProvider()
                 .withName("test")
-                .withParameter("id", "123");
+                .withParameter("id", "123")
+                .withParameter("number", 321);
 
-        String expected = "test(id: \"123\"){name age inner{other}}";
+        String expected = "test(id: \"123\", number: 321){name age inner{other}}";
 
         assertEquals(expected, provider.toQuery(TestResult.class));
     }

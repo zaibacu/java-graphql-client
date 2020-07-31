@@ -52,7 +52,8 @@ public class Utils {
         return "(" + parameters
                 .entrySet()
                 .stream()
+                .sorted((e1, e2) -> e1.getKey().compareTo(e2.getKey()))
                 .map(e -> e.getKey() + ": " + renderParameterValue(e.getValue()))
-                .collect(Collectors.joining(",")) + ")";
+                .collect(Collectors.joining(", ")) + ")";
     }
 }
