@@ -1,9 +1,10 @@
 package zaibacu.graphql.dto;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class MutationDTO extends QueryDTO{
-    private Map<String, Object> variables;
+    private Map<String, Object> variables = new HashMap<>();
 
     public MutationDTO(){
 

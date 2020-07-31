@@ -30,14 +30,14 @@ public class QueryProvider implements ActionProvider{
         return this;
     }
 
-    protected <T extends Serializable> String toQuery(Class<T> resultClass){
+    protected <T extends Serializable> String toQuery(String resultPath, Class<T> resultClass){
         StringBuilder request = new StringBuilder();
         if(name != null){
             request.append(name);
         }
         request.append(Utils.parametersString(parameters));
         request.append("{");
-        request.append(Utils.resultString(resultClass));
+        request.append(Utils.nestResult(resultPath, Utils.resultString(resultClass)));
         request.append("}");
 
         return request.toString();
@@ -45,7 +45,7 @@ public class QueryProvider implements ActionProvider{
 
     @Override
     public <T extends Serializable> Optional<List<T>> execute(String resultPath, Class<T> resultClass) {
-        QueryDTO dto = new QueryDTO(this.toQuery(resultClass));
+        QueryDTO dto = new QueryDTO(this.toQuery(resultPath, resultClass));
         try {
             return service.post(Utils.toString(dto), resultPath, resultClass);
         }

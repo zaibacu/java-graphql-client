@@ -32,14 +32,14 @@ public class MutationProvider implements ActionProvider{
         return this;
     }
 
-    protected <T extends Serializable> String toMutation(Class<T> resultClass){
+    protected <T extends Serializable> String toMutation(String resultPath, Class<T> resultClass){
         StringBuilder request = new StringBuilder();
         request.append("mutation{");
 
         request.append(name);
         request.append(Utils.parametersString(parameters));
         request.append("{");
-        request.append(Utils.resultString(resultClass));
+        request.append(Utils.nestResult(resultPath, Utils.resultString(resultClass)));
         request.append("}");
 
         request.append("}");
@@ -49,9 +49,9 @@ public class MutationProvider implements ActionProvider{
 
     @Override
     public <T extends Serializable> Optional<List<T>> execute(String resultPath, Class<T> resultClass) {
-        MutationDTO dto = new MutationDTO(this.toMutation(resultClass));
+        MutationDTO dto = new MutationDTO(this.toMutation(resultPath, resultClass));
         try {
-            return service.post(Utils.toString(dto), resultPath, resultClass);
+            return service.post(Utils.toString(dto), String.format("data.%s.%s", name, resultPath), resultClass);
         }
         catch(Exception ex){
             return Optional.empty();

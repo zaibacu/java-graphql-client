@@ -1,9 +1,8 @@
 package zaibacu.graphql.services;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.type.CollectionType;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
@@ -27,9 +26,17 @@ public class ApacheHttpService implements HttpService {
     @Override
     public <T extends Serializable> Optional<List<T>> post(String json, String resultPath, Class<T> klass) {
         HttpPost httpPost = new HttpPost(url);
+        try {
+            httpPost.setEntity(new StringEntity(json, "UTF-8"));
+        }
+        catch(Exception ex){
+            return Optional.empty();
+        }
+
         for (Map.Entry<String, String> entry: headers.entrySet()) {
             httpPost.addHeader(entry.getKey(), entry.getValue());
         }
+        httpPost.addHeader("Content-Type", "application/json");
 
         try(CloseableHttpClient httpclient = HttpClients.createDefault()) {
             CloseableHttpResponse response = httpclient.execute(httpPost);

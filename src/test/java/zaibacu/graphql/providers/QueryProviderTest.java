@@ -11,9 +11,9 @@ public class QueryProviderTest {
         QueryProvider provider = new QueryProvider()
                 .withName("test");
 
-        String expected = "test{name age inner{other}}";
+        String expected = "test{result{name age inner{other}}}";
 
-        assertEquals(expected, provider.toQuery(TestResult.class));
+        assertEquals(expected, provider.toQuery("result", TestResult.class));
     }
 
     @Test
@@ -23,8 +23,8 @@ public class QueryProviderTest {
                 .withParameter("id", "123")
                 .withParameter("number", 321);
 
-        String expected = "test(id: \"123\", number: 321){name age inner{other}}";
+        String expected = "test(id: \"123\", number: 321){result{name age inner{other}}}";
 
-        assertEquals(expected, provider.toQuery(TestResult.class));
+        assertEquals(expected, provider.toQuery("result", TestResult.class));
     }
 }

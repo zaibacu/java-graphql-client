@@ -11,8 +11,8 @@ public class MutationProviderTest {
                 .withName("doTest")
                 .withParameter("input", 123);
 
-        String expected = "mutation{doTest(input: 123){name age inner{other}}}";
+        String expected = "mutation{doTest(input: 123){result{name age inner{other}}}}";
 
-        assertEquals(expected, provider.toMutation(TestResult.class));
+        assertEquals(expected, provider.toMutation("result", TestResult.class));
     }
 }

@@ -1,10 +1,8 @@
 package zaibacu.graphql.providers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.type.CollectionType;
 import zaibacu.graphql.exceptions.InvalidResultPath;
 
 import java.io.IOException;
@@ -66,7 +64,7 @@ public class Utils {
 
     public static <T extends Serializable> List<T> parseJson(String json, String resultPath, Class<T> klass) throws JsonProcessingException, IOException {
         JsonNode rootNode = objectMapper.readTree(json);
-        String[] pathBuffer = resultPath.split(".");
+        String[] pathBuffer = resultPath.split("\\.");
         if(pathBuffer.length == 0){
             pathBuffer = new String[]{resultPath};
         }
@@ -94,5 +92,26 @@ public class Utils {
 
     public static <T extends Serializable> String toString(T obj) throws JsonProcessingException{
         return objectMapper.writeValueAsString(obj);
+    }
+
+    public static String nestResult(String resultPath, String result){
+        String[] pathBuff = resultPath.split("\\.");
+        if(pathBuff.length == 0){
+            pathBuff = new String[]{resultPath};
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for(String path : pathBuff){
+            sb.append(path);
+            sb.append("{");
+        }
+
+        sb.append(result);
+
+        for(String path : pathBuff){
+            sb.append("}");
+        }
+
+        return sb.toString();
     }
 }
