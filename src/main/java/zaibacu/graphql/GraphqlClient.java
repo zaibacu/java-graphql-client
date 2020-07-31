@@ -18,6 +18,7 @@ public class GraphqlClient {
 
     public QueryProvider query(String name){
         QueryProvider builder = new QueryProvider()
+                .withName(name)
                 .withHttpService(httpService);
 
         return builder;
@@ -25,6 +26,7 @@ public class GraphqlClient {
 
     public MutationProvider mutate(String name){
         MutationProvider builder = new MutationProvider()
+                .withName(name)
                 .withHttpService(httpService);
 
         return builder;

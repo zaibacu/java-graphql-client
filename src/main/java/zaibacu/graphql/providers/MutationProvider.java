@@ -16,12 +16,12 @@ public class MutationProvider implements ActionProvider{
     }
 
     @Override
-    public ActionProvider withParameter(String name, Object param) {
-        return null;
+    public MutationProvider withParameter(String name, Object param) {
+        return this;
     }
 
     @Override
-    public ActionProvider withName(String name) {
+    public MutationProvider withName(String name) {
         this.name = name;
         return this;
     }
