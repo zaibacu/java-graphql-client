@@ -8,6 +8,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import zaibacu.graphql.exceptions.InvalidResultPath;
+import zaibacu.graphql.providers.Utils;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -15,7 +16,6 @@ import java.util.Map;
 import java.util.Optional;
 
 public class ApacheHttpService implements HttpService {
-    private ObjectMapper objectMapper = new ObjectMapper();
     private String url;
     private Map<String, String> headers;
 
@@ -35,19 +35,7 @@ public class ApacheHttpService implements HttpService {
             CloseableHttpResponse response = httpclient.execute(httpPost);
             String resultJson = EntityUtils.toString(response.getEntity(), "UTF-8");
             response.close();
-
-            JsonNode rootNode = objectMapper.readTree(resultJson);
-            String[] pathBuffer = resultPath.split(".");
-
-            JsonNode current = rootNode;
-            for(String path : pathBuffer){
-                current = current.get(path);
-                if(current == null){
-                    throw new InvalidResultPath();
-                }
-            }
-
-            return Optional.of(objectMapper.treeToValue(current, klass));
+            return Optional.of(Utils.parseJson(resultJson, resultPath, klass));
         }
         catch(IOException ioException){
             return Optional.empty();

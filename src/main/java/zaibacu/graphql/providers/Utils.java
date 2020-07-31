@@ -1,14 +1,19 @@
 package zaibacu.graphql.providers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import zaibacu.graphql.exceptions.InvalidResultPath;
+
+import java.io.IOException;
 import java.io.Serializable;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Utils {
+    private static ObjectMapper objectMapper = new ObjectMapper();
+
     public static<T> String resultString(Class<T> resultClass){
         List<Field> fields = new ArrayList<>();
         Class klass = resultClass;
@@ -55,5 +60,23 @@ public class Utils {
                 .sorted((e1, e2) -> e1.getKey().compareTo(e2.getKey()))
                 .map(e -> e.getKey() + ": " + renderParameterValue(e.getValue()))
                 .collect(Collectors.joining(", ")) + ")";
+    }
+
+    public static <T extends Serializable> T parseJson(String json, String resultPath, Class<T> klass) throws JsonProcessingException, IOException {
+        JsonNode rootNode = objectMapper.readTree(json);
+        String[] pathBuffer = resultPath.split(".");
+        if(pathBuffer.length == 0){
+            pathBuffer = new String[]{resultPath};
+        }
+
+        JsonNode current = rootNode;
+        for(String path : pathBuffer){
+            current = current.get(path);
+            if(current == null){
+                throw new InvalidResultPath();
+            }
+        }
+
+        return objectMapper.treeToValue(current, klass);
     }
 }
