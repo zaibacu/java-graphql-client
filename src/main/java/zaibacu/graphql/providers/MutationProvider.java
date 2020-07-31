@@ -13,6 +13,13 @@ public class MutationProvider implements ActionProvider{
     private HttpService service;
     private String name;
     private Map<String, Object> parameters = new HashMap<>();
+    private String prefix = "data";
+
+    @Override
+    public MutationProvider withResultPrefix(String prefix){
+        this.prefix = prefix;
+        return this;
+    }
 
     @Override
     public MutationProvider withHttpService(HttpService service){
@@ -51,7 +58,7 @@ public class MutationProvider implements ActionProvider{
     public <T extends Serializable> Optional<List<T>> execute(String resultPath, Class<T> resultClass) {
         MutationDTO dto = new MutationDTO(this.toMutation(resultPath, resultClass));
         try {
-            return service.post(Utils.toString(dto), String.format("data.%s.%s", name, resultPath), resultClass);
+            return service.post(Utils.toString(dto), String.format("%s.%s.%s", prefix, name, resultPath), resultClass);
         }
         catch(Exception ex){
             return Optional.empty();
