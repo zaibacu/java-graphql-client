@@ -27,7 +27,7 @@ public class MutationProvider implements ActionProvider{
     }
 
     @Override
-    public <T extends Serializable> Optional<T> execute(Class<T> resultClass) {
+    public <T extends Serializable> Optional<T> execute(String resultPath, Class<T> resultClass) {
         return Optional.empty();
     }
 }

@@ -42,7 +42,7 @@ public class QueryProvider implements ActionProvider{
     }
 
     @Override
-    public <T extends Serializable> Optional<T> execute(Class<T> resultClass) {
-        return service.post(this.toQuery(resultClass), resultClass);
+    public <T extends Serializable> Optional<T> execute(String resultPath, Class<T> resultClass) {
+        return service.post(this.toQuery(resultClass), resultPath, resultClass);
     }
 }

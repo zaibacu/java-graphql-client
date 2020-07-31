@@ -9,5 +9,5 @@ public interface ActionProvider {
     ActionProvider withHttpService(HttpService service);
     ActionProvider withParameter(String name, Object param);
     ActionProvider withName(String name);
-    <T extends Serializable> Optional<T> execute(Class<T> resultClass);
+    <T extends Serializable> Optional<T> execute(String resultPath, Class<T> resultClass);
 }

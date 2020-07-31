@@ -5,7 +5,15 @@ Interact with GraphQL API via Java. Nothing more, nothing less.
 # Quickstart
 
 ## Install
-...
+
+Maven:
+```xml
+<dependency>
+    <groupId>zaibacu</groupId>
+    <artifactId>graphql</artifactId>
+    <version>1.0</version>
+</dependency>
+```
 
 ## Usage
 
@@ -21,7 +29,7 @@ public class Example{
             .query("products")
             .withParameter("category", "shoes")
             .withParameter("priceRange", "cheap")
-            .execute(Product[].class);
+            .execute("products", Product[].class);
 
         return List.of(products);
     }
