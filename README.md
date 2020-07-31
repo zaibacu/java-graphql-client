@@ -27,11 +27,11 @@ public class Example{
             .withUrl("http://localhost:8000/graphql")
             .build();
         
-        Products[] products = client
+        List<Products> products = client
             .query("products")
             .withParameter("category", "shoes")
             .withParameter("priceRange", "cheap")
-            .execute("products", Product[].class);
+            .execute("products", Product.class);
 
         return List.of(products);
     }
@@ -42,10 +42,10 @@ Where `Product` is:
 
 ```java
 public class Product implements Serializable{
-    private String name;
-    private double price;
-    private String category;
-    private String priceRange;
+    public String name;
+    public double price;
+    public String category;
+    public String priceRange;
 }
 ```
 
@@ -55,7 +55,18 @@ public class Product implements Serializable{
 ```java
 public class Example {
     public void addProduct(Product product){
-        
+        GraphqlClient client = GraphqlClient
+                    .builder()
+                    .withUrl("http://localhost:8000/graphql")
+                    .build();
+        client
+            .mutate("addProduct")
+            .withParameter("name", "test")
+            .withParameter("price", 42.0)
+            .withParameter("category", "shoes")
+            .withParameter("priceRange", "cheap")
+            .execute("products");
+
     }
 }
 ```
