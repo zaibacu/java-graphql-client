@@ -5,6 +5,7 @@ import zaibacu.graphql.services.HttpService;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -47,7 +48,7 @@ public class MutationProvider implements ActionProvider{
     }
 
     @Override
-    public <T extends Serializable> Optional<T> execute(String resultPath, Class<T> resultClass) {
+    public <T extends Serializable> Optional<List<T>> execute(String resultPath, Class<T> resultClass) {
         MutationDTO dto = new MutationDTO(this.toMutation(resultClass));
         try {
             return service.post(Utils.toString(dto), resultPath, resultClass);

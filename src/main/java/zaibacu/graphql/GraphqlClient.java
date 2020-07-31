@@ -32,6 +32,10 @@ public class GraphqlClient {
         return builder;
     }
 
+    public static Builder builder(){
+        return new Builder();
+    }
+
     public static class Builder{
         private String url;
         private Map<String, String> headers = new HashMap<>();
@@ -46,7 +50,7 @@ public class GraphqlClient {
             return this;
         }
 
-        public Builder withAuthToken(String key, String value){
+        public Builder withAuthToken(String value){
             this.headers.put("Authorization", "Token " + value);
             return this;
         }

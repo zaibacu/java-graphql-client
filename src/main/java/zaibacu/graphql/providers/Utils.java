@@ -1,8 +1,10 @@
 package zaibacu.graphql.providers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.CollectionType;
 import zaibacu.graphql.exceptions.InvalidResultPath;
 
 import java.io.IOException;
@@ -62,7 +64,7 @@ public class Utils {
                 .collect(Collectors.joining(", ")) + ")";
     }
 
-    public static <T extends Serializable> T parseJson(String json, String resultPath, Class<T> klass) throws JsonProcessingException, IOException {
+    public static <T extends Serializable> List<T> parseJson(String json, String resultPath, Class<T> klass) throws JsonProcessingException, IOException {
         JsonNode rootNode = objectMapper.readTree(json);
         String[] pathBuffer = resultPath.split(".");
         if(pathBuffer.length == 0){
@@ -77,7 +79,17 @@ public class Utils {
             }
         }
 
-        return objectMapper.treeToValue(current, klass);
+        List<T> results = new ArrayList<>();
+        if(current.isContainerNode()){
+            for(final JsonNode node : current){
+                results.add(objectMapper.treeToValue(node, klass));
+            }
+        }
+        else{
+            results.add(objectMapper.treeToValue(current, klass));
+        }
+
+        return results;
     }
 
     public static <T extends Serializable> String toString(T obj) throws JsonProcessingException{

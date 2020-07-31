@@ -1,5 +1,6 @@
 package zaibacu.graphql.providers;
 
+import com.fasterxml.jackson.databind.type.CollectionType;
 import zaibacu.graphql.dto.QueryDTO;
 import zaibacu.graphql.services.HttpService;
 
@@ -43,7 +44,7 @@ public class QueryProvider implements ActionProvider{
     }
 
     @Override
-    public <T extends Serializable> Optional<T> execute(String resultPath, Class<T> resultClass) {
+    public <T extends Serializable> Optional<List<T>> execute(String resultPath, Class<T> resultClass) {
         QueryDTO dto = new QueryDTO(this.toQuery(resultClass));
         try {
             return service.post(Utils.toString(dto), resultPath, resultClass);
