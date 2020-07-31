@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface ActionProvider {
     ActionProvider withHttpService(HttpService service);
-    ActionProvider withParameter(String name, String param);
+    ActionProvider withParameter(String name, Object param);
     ActionProvider withName(String name);
     <T extends Serializable> Optional<T> execute(Class<T> resultClass);
 }

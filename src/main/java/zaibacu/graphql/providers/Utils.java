@@ -35,7 +35,16 @@ public class Utils {
                 .collect(Collectors.joining(" "));
     }
 
-    public static String parametersString(Map<String, String> parameters){
+    private static String renderParameterValue(Object param){
+        if(param instanceof String){
+            return String.format("\"%s\"", param);
+        }
+        else{
+            return param.toString();
+        }
+    }
+
+    public static String parametersString(Map<String, Object> parameters){
         if(parameters.isEmpty()){
             return "";
         }
@@ -43,7 +52,7 @@ public class Utils {
         return "(" + parameters
                 .entrySet()
                 .stream()
-                .map(e -> e.getKey() + ": " + e.getValue())
+                .map(e -> e.getKey() + ": " + renderParameterValue(e.getValue()))
                 .collect(Collectors.joining(",")) + ")";
     }
 }

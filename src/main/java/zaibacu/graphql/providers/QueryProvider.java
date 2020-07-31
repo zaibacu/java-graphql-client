@@ -7,7 +7,7 @@ import java.util.*;
 
 public class QueryProvider implements ActionProvider{
     private HttpService service;
-    private Map<String, String> parameters = new HashMap<>();
+    private Map<String, Object> parameters = new HashMap<>();
     private String name;
 
     @Override
@@ -17,7 +17,7 @@ public class QueryProvider implements ActionProvider{
     }
 
     @Override
-    public QueryProvider withParameter(String name, String param) {
+    public QueryProvider withParameter(String name, Object param) {
         parameters.put(name, param);
         return this;
     }
@@ -29,7 +29,10 @@ public class QueryProvider implements ActionProvider{
     }
 
     protected <T extends Serializable> String toQuery(Class<T> resultClass){
-        StringBuilder request = new StringBuilder(name);
+        StringBuilder request = new StringBuilder();
+        if(name != null){
+            request.append(name);
+        }
         request.append(Utils.parametersString(parameters));
         request.append("{");
         request.append(Utils.resultString(resultClass));

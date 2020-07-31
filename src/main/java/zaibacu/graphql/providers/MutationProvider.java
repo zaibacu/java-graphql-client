@@ -16,7 +16,7 @@ public class MutationProvider implements ActionProvider{
     }
 
     @Override
-    public ActionProvider withParameter(String name, String param) {
+    public ActionProvider withParameter(String name, Object param) {
         return null;
     }
 
