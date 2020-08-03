@@ -1,9 +1,9 @@
-package zaibacu.graphql.providers;
+package com.github.zaibacu.graphql.providers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import zaibacu.graphql.exceptions.InvalidResultPath;
+import com.github.zaibacu.graphql.exceptions.InvalidResultPath;
 
 import java.io.IOException;
 import java.io.Serializable;

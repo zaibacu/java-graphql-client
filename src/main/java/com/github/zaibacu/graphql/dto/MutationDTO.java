@@ -1,4 +1,4 @@
-package zaibacu.graphql.dto;
+package com.github.zaibacu.graphql.dto;
 
 import java.util.HashMap;
 import java.util.Map;

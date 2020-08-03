@@ -1,4 +1,4 @@
-package zaibacu.graphql.wrappers;
+package com.github.zaibacu.graphql.wrappers;
 
 import java.io.Serializable;
 import java.util.List;

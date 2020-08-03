@@ -1,4 +1,4 @@
-package zaibacu.graphql.providers;
+package com.github.zaibacu.graphql.providers;
 
 import java.io.Serializable;
 

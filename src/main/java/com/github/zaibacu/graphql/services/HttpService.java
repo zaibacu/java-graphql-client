@@ -1,4 +1,4 @@
-package zaibacu.graphql.services;
+package com.github.zaibacu.graphql.services;
 
 import java.io.Serializable;
 import java.util.List;

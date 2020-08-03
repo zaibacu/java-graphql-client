@@ -1,12 +1,12 @@
-package zaibacu.graphql.services;
+package com.github.zaibacu.graphql.services;
 
+import com.github.zaibacu.graphql.providers.Utils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import zaibacu.graphql.providers.Utils;
 
 import java.io.IOException;
 import java.io.Serializable;

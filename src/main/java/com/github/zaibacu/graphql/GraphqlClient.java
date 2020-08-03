@@ -1,10 +1,9 @@
-package zaibacu.graphql;
+package com.github.zaibacu.graphql;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import zaibacu.graphql.providers.MutationProvider;
-import zaibacu.graphql.providers.QueryProvider;
-import zaibacu.graphql.services.ApacheHttpService;
-import zaibacu.graphql.services.HttpService;
+import com.github.zaibacu.graphql.providers.MutationProvider;
+import com.github.zaibacu.graphql.providers.QueryProvider;
+import com.github.zaibacu.graphql.services.ApacheHttpService;
+import com.github.zaibacu.graphql.services.HttpService;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,6 +1,6 @@
-package zaibacu.graphql.providers;
+package com.github.zaibacu.graphql.providers;
 
-import zaibacu.graphql.services.HttpService;
+import com.github.zaibacu.graphql.services.HttpService;
 
 import java.io.Serializable;
 import java.util.List;
