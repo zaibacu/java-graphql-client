@@ -6,7 +6,7 @@
 
     <groupId>com.github.zaibacu</groupId>
     <artifactId>java-graphql-client</artifactId>
-    <version>1.0</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <licenses>
@@ -18,8 +18,8 @@
     </licenses>
 
     <scm>
-        <connection>https://github.com/zaibacu/java-graphql-client.git</connection>
-        <developerConnection>git@github.com:zaibacu/java-graphql-client.git</developerConnection>
+        <connection>scm:git:git://github.com/zaibacu/java-graphql-client.git</connection>
+        <developerConnection>scm:git:git@github.com:zaibacu/java-graphql-client.git</developerConnection>
         <url>https://github.com/zaibacu/java-graphql-client</url>
         <tag>HEAD</tag>
     </scm>
