@@ -18,19 +18,10 @@
     </licenses>
 
     <scm>
-        <url>https://github.com/zaibacu/java-graphql-client.git</url>
-    </scm>
-
-    <scm>
-
         <connection>https://github.com/zaibacu/java-graphql-client.git</connection>
-
         <developerConnection>git@github.com:zaibacu/java-graphql-client.git</developerConnection>
-
         <url>https://github.com/zaibacu/java-graphql-client</url>
-
         <tag>HEAD</tag>
-
     </scm>
 
     <properties>
