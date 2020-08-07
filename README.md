@@ -9,9 +9,9 @@ Interact with GraphQL API via Java. Nothing more, nothing less.
 Maven:
 ```xml
 <dependency>
-    <groupId>com.github.zaibacu</groupId>
-    <artifactId>graphql</artifactId>
-    <version>1.1</version>
+  <groupId>com.github.zaibacu</groupId>
+  <artifactId>java-graphql-client</artifactId>
+  <version>1.2-SNAPSHOT</version>
 </dependency>
 ```
 
