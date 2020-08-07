@@ -9,7 +9,7 @@ Interact with GraphQL API via Java. Nothing more, nothing less.
 Maven:
 ```xml
 <dependency>
-    <groupId>zaibacu</groupId>
+    <groupId>com.github.zaibacu</groupId>
     <artifactId>graphql</artifactId>
     <version>1.1</version>
 </dependency>
@@ -33,7 +33,7 @@ public class Example{
             .withParameter("priceRange", "cheap")
             .execute("products", Product.class);
 
-        return List.of(products);
+        return products;
     }
 }
 ```
